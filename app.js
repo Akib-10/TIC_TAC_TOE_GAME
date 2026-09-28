@@ -18,6 +18,12 @@ let turnO = true;
 let count = 0;
 
 
+const resetGame = () =>{
+    turnO = true;
+    enableBoxes();
+    msgContainer.classList.add("hide");
+}
+
 boxes.forEach((box) => {
     box.addEventListener("click",() => {
         console.log("Box clicked");
@@ -29,10 +35,19 @@ boxes.forEach((box) => {
            turnO = true;
         }
         box.disabled = true; // oi box ta ke disabled korar jonno
-
-        checkWinner();
+        count++;
+        let isWinner = checkWinner();
+        if(count === 9 && !isWinner){
+            gameDraw();
+        }
     });
 });
+
+const gameDraw = () =>{
+    msg.innerText = `Game Draw`;
+    msgContainer.classList.remove("hide");
+    disableBoxes();
+}
 
 const checkWinner = () => {
     for(let pattern of winPatterns){
@@ -43,7 +58,7 @@ const checkWinner = () => {
             if(pos1Val === pos2Val && pos2Val === pos3Val){
                 showWinner(pos1Val);
             }
-        } 
+        }
     }
 }
 
@@ -59,11 +74,12 @@ const disableBoxes = () => {
     }
 };
 
-const resetGame = () => {
-  turnO = true;
-  count = 0;
-  enableBoxes();
-  msgContainer.classList.add("hide");
+const enableBoxes = () => {
+    for(let box of boxes){
+        box.disabled = false;
+        box.innerText = "";
+    }
 };
 
-resetBtn.addEventListener("click", resetGame);
+newGameBtn.addEventListener("click",resetGame);
+restBtn.addEventListener("click",resetGame);
