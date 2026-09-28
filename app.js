@@ -9,6 +9,7 @@ const winPatterns =[
   [6, 7, 8],
 ];
 
+let mainClass = document.querySelector(".main-class");
 let boxes = document.querySelectorAll(".box");
 let restBtn = document.querySelector("#reset-btn");
 let newGameBtn = document.querySelector("#new-btn");
@@ -17,11 +18,12 @@ let msg = document.querySelector("#msg");
 let turnO = true;
 let count = 0;
 
-
 const resetGame = () =>{
     turnO = true;
+    count = 0;
     enableBoxes();
     msgContainer.classList.add("hide");
+    mainClass.classList.remove("hide");
 }
 
 boxes.forEach((box) => {
@@ -47,6 +49,7 @@ const gameDraw = () =>{
     msg.innerText = `Game Draw`;
     msgContainer.classList.remove("hide");
     disableBoxes();
+    mainClass.classList.add("hide");
 }
 
 const checkWinner = () => {
@@ -66,6 +69,7 @@ const showWinner = (Winner) =>{
     msg.innerText = `Congratulations, Winner is ${Winner}`;
     msgContainer.classList.remove("hide"); // css er kaj dekhe classList use korechi
     disableBoxes(); // game sesh korar por box e click korle output na ashe tai all box disable
+    mainClass.classList.add("hide");
 };
 
 const disableBoxes = () => {
