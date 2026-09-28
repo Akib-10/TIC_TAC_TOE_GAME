@@ -65,3 +65,5 @@ const resetGame = () => {
   enableBoxes();
   msgContainer.classList.add("hide");
 };
+
+resetBtn.addEventListener("click", resetGame);
